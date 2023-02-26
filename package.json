@@ -1,6 +1,6 @@
 {
-  "name": "react-keyed-file-browser",
-  "version": "1.14.0",
+  "name": "react-keyed-file-browser-rk",
+  "version": "1.14.10",
   "description": "Folder based file browser given a flat keyed list of objects, powered by React.",
   "main": "index.js",
   "scripts": {
@@ -16,10 +16,6 @@
   "files": [
     "dist/**"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/uptick/react-keyed-file-browser.git"
-  },
   "keywords": [
     "react",
     "keyed",
@@ -28,12 +24,8 @@
     "browser",
     "s3"
   ],
-  "author": "Uptick Pty Ltd",
+  "author": "Rakesh Kumar",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/uptick/react-keyed-file-browser/issues"
-  },
-  "homepage": "https://github.com/uptick/react-keyed-file-browser#readme",
   "dependencies": {
     "classnames": "^2.2.6",
     "date-fns": "^2.22.1",

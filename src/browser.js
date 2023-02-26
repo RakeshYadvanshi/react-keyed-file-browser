@@ -98,8 +98,10 @@ class RawFileBrowser extends React.Component {
     onDeleteFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDownloadFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDownloadFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    onItemDrop: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 
     onSelect: PropTypes.func,
+    onMultipleSelect: PropTypes.func,
     onSelectFile: PropTypes.func,
     onSelectFolder: PropTypes.func,
 
@@ -144,6 +146,7 @@ class RawFileBrowser extends React.Component {
 
     onSelect: (fileOrFolder) => { }, // Always called when a file or folder is selected
     onSelectFile: (file) => { }, //    Called after onSelect, only on file selection
+    onMultipleSelect: (files) => { }, // Always called when a file or folder is selected and pass all selcted files
     onSelectFolder: (folder) => { }, //    Called after onSelect, only on folder selection
 
     onPreviewOpen: (file) => { }, // File opened
@@ -151,6 +154,7 @@ class RawFileBrowser extends React.Component {
 
     onFolderOpen: (folder) => { }, // Folder opened
     onFolderClose: (folder) => { }, // Folder closed
+    onDropItem:(droppedItem,droppedOnItem)=>{console.log(droppedItem,droppedOnItem)}
   }
 
   state = {
@@ -209,6 +213,9 @@ class RawFileBrowser extends React.Component {
     }, () => {
       this.props.onCreateFiles(files, prefix)
     })
+  }
+  itemDrop=(droppedItem, droppedOnItem)=>{
+    this.props.onItemDrop(droppedItem, droppedOnItem)
   }
 
   createFolder = (key) => {
@@ -364,6 +371,7 @@ class RawFileBrowser extends React.Component {
       activeAction: shouldClearState ? null : prevState.activeAction,
     }), () => {
       this.props.onSelect(selected)
+      this.props.onMultipleSelect(this.state.selection)
 
       if (selectedType === 'file') this.props.onSelectFile(selected)
       if (selectedType === 'folder') this.props.onSelectFolder(selected)
@@ -531,7 +539,7 @@ class RawFileBrowser extends React.Component {
       moveFolder: this.props.onMoveFolder ? this.moveFolder : undefined,
       deleteFile: this.props.onDeleteFile ? this.deleteFile : undefined,
       deleteFolder: this.props.onDeleteFolder ? this.deleteFolder : undefined,
-
+      itemDrop: this.props.onItemDrop ? this.itemDrop : undefined,
       getItemProps: getItemProps,
     }
   }

@@ -172,6 +172,7 @@ const dragSource = {
     }
     return {
       key: props.fileKey,
+      id:props.id
     }
   },
 
@@ -197,6 +198,7 @@ const targetSource = {
     const slashIndex = key.lastIndexOf('/')
     const path = (slashIndex !== -1) ? key.substr(0, slashIndex + 1) : ''
     const item = monitor.getItem()
+    props.browserProps.itemDrop({ fileKey: item.key,id:item.id }, { fileKey: props.fileKey, id: props.id })
     if (item.files && props.browserProps.createFiles) {
       props.browserProps.createFiles(item.files, path)
     }

@@ -165,6 +165,7 @@ const dragSource = {
     }
     return {
       key: props.fileKey,
+      id:props.id
     }
   },
 

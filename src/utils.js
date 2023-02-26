@@ -17,7 +17,6 @@ function moveFilesAndFolders(props, monitor, component) {
   })
 
   props.browserProps.openFolder(dropResult.path)
-
   folders
     .forEach(selection => {
       const fileKey = selection
@@ -39,6 +38,7 @@ function moveFilesAndFolders(props, monitor, component) {
       const fileNameParts = fileKey.split('/')
       const fileName = fileNameParts[fileNameParts.length - 1]
       const newKey = `${dropResult.path}${fileName}`
+      console.log("moveFilesAndFolders",fileKey,fileNameParts,fileName,newKey)
       if (newKey !== fileKey && props.browserProps.moveFile) {
         props.browserProps.moveFile(fileKey, newKey)
       }
