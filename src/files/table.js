@@ -29,6 +29,7 @@ class RawTableFile extends BaseFile {
           handleFileClick={this.handleFileClick}
           url={url}
         >
+          <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
           {icon}
           {this.getName()}
         </ConfirmDeletionRenderer>
@@ -36,6 +37,7 @@ class RawTableFile extends BaseFile {
     } else if (!inAction && isRenaming) {
       name = (
         <form className="renaming" onSubmit={this.handleRenameSubmit}>
+          <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
           {icon}
           <input
             ref={this.selectFileNameFromRef}
@@ -49,7 +51,9 @@ class RawTableFile extends BaseFile {
       )
     } else {
       name = (
-        <a
+        <>
+        <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
+         <a
           href={url || '#'}
           download="download"
           onClick={this.handleFileClick}
@@ -57,6 +61,8 @@ class RawTableFile extends BaseFile {
           {icon}
           {this.getName()}
         </a>
+        </>
+       
       )
     }
 

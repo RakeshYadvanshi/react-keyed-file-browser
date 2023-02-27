@@ -27,6 +27,7 @@ class RawTableFolder extends BaseFolder {
           handleFileClick={this.handleFileClick}
           url={url}
         >
+          <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
           {icon}
           {this.getName()}
         </ConfirmDeletionRenderer>
@@ -35,6 +36,7 @@ class RawTableFolder extends BaseFolder {
       name = (
         <div>
           <form className="renaming" onSubmit={this.handleRenameSubmit}>
+          <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
             {icon}
             <input
               type="text"
@@ -50,6 +52,7 @@ class RawTableFolder extends BaseFolder {
     } else {
       name = (
         <div>
+          <input type="checkbox" style={{marginRight:"5px"}} checked={isSelected} onChange={this.handleCheckboxClick} />
           <a onClick={this.toggleFolder}>
             {icon}
             {this.getName()}
