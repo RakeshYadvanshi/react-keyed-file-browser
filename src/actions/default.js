@@ -28,6 +28,7 @@ const Actions = (props) => {
 
     canDownloadFolder,
     onDownloadFolder,
+    onClearSelection,
 
   } = props
 
@@ -147,13 +148,28 @@ const Actions = (props) => {
           </li>
         )
       }
+      
+      if (selectedItems.length > 0)
+      actions.push(
+        <li key="action-clear-selection">
+          <a
+            onClick={onClearSelection}
+            href="#"
+            role="button"
+          >
 
+            &nbsp;Clear Selection
+          </a>
+        </li>
+      )
       if (actions.length) {
         actions = (<ul className="item-actions">{actions}</ul>)
       } else {
         actions = (<div className="item-actions">&nbsp;</div>)
       }
     }
+    
+
   } else {
     // Nothing selected: We're in the 'root' folder. Only allowed action is adding a folder.
     if (canCreateFolder && !nameFilter) {
@@ -207,6 +223,7 @@ Actions.propTypes = {
 
   canDownloadFolder: PropTypes.bool,
   onDownloadFolder: PropTypes.func,
+  onClearSelection: PropTypes.func,
 }
 
 Actions.defaultProps = {
@@ -235,6 +252,7 @@ Actions.defaultProps = {
 
   canDownloadFolder: false,
   onDownloadFolder: null,
+  onClearSelection: null,
 }
 
 export default Actions

@@ -98,6 +98,7 @@ class RawFileBrowser extends React.Component {
     onDeleteFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDownloadFile: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onDownloadFolder: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    onClearSelection: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onItemDrop: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 
     onSelect: PropTypes.func,
@@ -496,6 +497,15 @@ class RawFileBrowser extends React.Component {
     this.downloadFile(this.state.selection)
   }
 
+  handleActionBarClearClick = (event) => {
+    this.setState({
+      selection: [],
+      actionTargets: [],
+      activeAction: null,
+    });
+    this.props.onMultipleSelect([])
+  }
+
   updateFilter = (newValue) => {
     this.setState({
       nameFilter: newValue,
@@ -551,7 +561,7 @@ class RawFileBrowser extends React.Component {
       actionRenderer: ActionRenderer,
       onCreateFolder, onRenameFile, onRenameFolder,
       onDeleteFile, onDeleteFolder, onDownloadFile,
-      onDownloadFolder,
+      onDownloadFolder
     } = this.props
     const browserProps = this.getBrowserProps()
     const selectionIsFolder = (selectedItems.length === 1 && isFolder(selectedItems[0]))
@@ -596,6 +606,8 @@ class RawFileBrowser extends React.Component {
 
         canDownloadFolder={typeof onDownloadFolder === 'function'}
         onDownloadFolder={this.handleActionBarDownloadClick}
+
+        onClearSelection={this.handleActionBarClearClick}
       />
     )
 
